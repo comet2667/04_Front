@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 02</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
+        </script>
+    <style>
+        .area {
+            border: 1px solid cornflowerblue;
+            height: 700px;
+            background-color: chartreuse;
+        }
+        #area1 > h6 {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>jQuery</h1>
+
+    <h3>jQuery 이벤트</h3>
+    <pre>
+        선택된요소.append(추가할 내용);
+    </pre>
+    <div class="area" id="area1">
+        <h6>클릭 시 h6 요소 추가</h6>
+        <div>
+            <h5>테스트!!</h5>
+        </div>
+    </div>
+    <script>
+        //id 속성이 area1인 요소 내의 h6 태그 클릭 시 h6 요소를 추가
+        //방법1) 이벤트 메소드 사용
+        /*$('#area1 > h6').click(function(){
+            $('#area1').append('<h6>추가됨<h6>');
+        });*/
+        // => 동적으로 생성된 요소에는 이벤트가 적용되지 않음
+
+        //방법2) on 메소드
+        /*$('#area1 > h6').on('click', function(){
+            $('#area1').append('<h6>추가됨<h6>');
+        })*/
+        // => 동적으로 생성된 요소에는 이벤트가 적용되지 않음
+
+        //방법3) 부모요소로부터 on 메소드 사용
+        //$(부모요소선택).on(이벤트명, 자식요소, function(){})
+        $('#area1').on('click','h6',function(){
+            $('#area1').append('<h6>추가됨<h6>');
+        })
+        // => 동적으로 생성된 요소에 이벤트가 적용된다!!!
+        
+        // => 이벤트 작성 시 한번만 실행하고자 할 때 one 메소드 사용
+        $('#area1 h5').one('click', function(){
+            $('#area1').append('<h5>one 메소드 추가됨<h5>');
+        })
+        
+    </script>
+    <hr>
+    <h2>시각적인 효과를 보여주는 메소드(Effect Method)</h2>
+    <p>
+        페이지 내에 애니메이션 효과를 주기 위해 사용되는 메소드
+    </p>
+    <table border="1px solid">
+        <tr>
+            <th>메소드명</th>
+            <th>기능 설명</th>
+        </tr>
+        <tr>
+            <td>show()</td>
+            <td rowspan="3">
+                선택된 요소가 점점 커지면서 보여주고, 작아지면서 사라지게 만드는 메소드<br>
+                *toggle : show와 hide를 번갈아가면서 동작
+            </td>
+        </tr>
+        <tr>
+            <td>hide()</td>
+        </tr>
+        <tr>
+            <td>toggle()</td>
+        </tr>
+        <tr>
+            <td>fadeIn()</td>
+            <td rowspan="3">
+                선택된 요소가 점점 투명해지면서 사라지거나, 점점 선명해지면서 보여지게 만드는 메소드
+
+            </td>
+        </tr>
+        <tr>
+            <td>fadeOut()</td>
+        </tr>
+        <tr>
+            <td>fadeToggle()</td>
+        </tr>
+        <tr>
+            <td>slideDown()</td>
+            <td rowspan="3">
+                선택된 요소가 슬라이드 효과와 함께 사라지거나 보여지게 만드는 메소드
+            </td>
+        </tr>
+        <tr>
+            <td>slideUp()</td>
+        </tr>
+        <tr>
+            <td>slideToggle()</td>
+        </tr>
+    </table>
+    <br>
+    <h3>*show() hide() toggle()</h3>
+    <p>
+        *option : 효과에 대한 지속시간 (default: 400)<br>
+        -"slow" : 200, "fast" : 600
+    </p>
+    <button id="btn-show">보기</button>
+    <button id="btn-hide">숨기기</button>
+    <button id="btn-toggle">토글</button>
+    <br>
+    <img id="img01" src="./img.jpg" alt="불러오기" width="300px">
+    <script>
+        // 보기버튼 클릭 시 이미지를 보여지도록 처리
+        $('#btn-hide').click(function(){
+            $('#img01').hide('slow');
+        });
+        $('#btn-show').click(function(){
+            $('#img01').show('fast');
+        });
+        $('#btn-toggle').click(function(){
+            $('#img01').toggle('fast');
+        })
+        // 숨기기 버튼 클릭 시 이미지를 사라지도록 처리
+
+        // 토글 버튼 클릭 시 이미지가 보여졌다가 사라졌다가 되도록 처리
+    </script>
+    <br>
+    <br>
+    <h2>*fadeIn() fadeOut() fadeToggle()</h2>
+    <button id="btn-fIn">보기</button>
+    <button id="btn-fOut">숨기기</button>
+    <button id="btn-fToggle">토글</button>
+    <br>
+    <img id="img02" src="./img.jpg" alt="불러오기" width="300px">
+    <script>
+        //보기 버튼 클릭 시 이미지를 점점 선명해지면서 보여지도록 처리
+        $('#btn-fIn').click(function(){
+            $('#img02').fadeIn('fast');
+        });
+        $('#btn-fOut').click(function(){
+            $('#img02').fadeOut('fast');
+        });
+        $('#btn-fToggle').click(function(){
+            $('#img02').fadeToggle();
+        });
+        //숨기기 버튼 클릭 시 이미지를 점점 투명해지면서 사라지도록 처리
+
+        //토글 버튼
+    </script>
+    <br>
+    <br>
+    <h2>*slideUp() slideDown() slideToggle()</h2>
+    <button id="btn-sDown">보기</button>
+    <button id="btn-sUp">숨기기</button>
+    <button id="btn-sToggle">토글</button>
+    <br>
+    <img id="img03" src="./img.jpg" alt="불러오기" width="300px">
+    <script>
+        $('#btn-sDown').click(function(){
+            $('#img03').slideDown('fast');
+        });
+        $('#btn-sUp').click(function(){
+            $('#img03').slideUp('fast');
+        });
+        $('#btn-sToggle').click(function(){
+            $('#img03').slideToggle();
+        });
+    </script>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

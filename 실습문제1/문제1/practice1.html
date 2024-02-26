@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제1</title>
+    <style>
+        #box {
+            border: 2px solid red;
+            height: 300px;
+            
+        }
+    </style>
+    <script>
+        function selectAll(){
+            let sel = document.getElementsByName("hobby");
+            console.log(sel);
+            for(let i = 1; i < sel.length;i++){
+                sel[i].checked = true;
+            }
+        }
+        function select1(){
+            console.log("select메소드 실행");
+            let bool = true;
+            let sel = document.getElementsByName("hobby");
+            for(let selArr of sel){
+                if (!selArr.checked){
+                    bool = false;
+                }
+            }
+            document.getElementById("selAll").checked = bool;
+        }
+        function printAll() {
+            let selList = new Array;
+            let sel = document.getElementsByName("hobby");
+            for(let i = 1 ; i < sel.length ; i++){
+                if(sel[i].checked){
+                    selList += " "+sel[i].value;
+                }
+            }
+            document.getElementById("box").innerText = selList;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>취미</legend>
+            <input type="checkbox" id="selAll" value="전체선택" name="hobby" onchange="selectAll()">
+            <label for="selAll">전체선택</label>
+            <input type="checkbox" id="a" name="hobby" value="종합" onchange="select1()" >
+            <label for="a">종합</label>
+            <input type="checkbox" id="b" name="hobby" value="소설" onchange="select1()">
+            <label for="b">소설</label>
+            <input type="checkbox" id="c"  name="hobby" value="시/에세이" onchange="select1()">
+            <label for="c">시/에세이</label>
+            <input type="checkbox" id="d"  name="hobby" value="경제/경영" onchange="select1()">
+            <label for="d">경제/경영</label>
+            <input type="checkbox" id="e"  name="hobby" value="자기계발" onchange="select1()">
+            <label for="e">자기계발</label>
+            <input type="checkbox" id="f"  name="hobby" value="아동" onchange="select1()">
+            <label for="f">아동</label>
+            <input type="checkbox" id="g"  name="hobby" value="여행" onchange="select1()">
+            <label for="g">여행</label>
+            <input type="checkbox" id="h"  name="hobby" value="과학" onchange="select1()">
+            <label for="h">과학</label>
+            <input type="checkbox" id="i"  name="hobby" value="역사/문화" onchange="select1()">
+            <label for="i">역사/문화</label>
+            <input type="checkbox" id="j"  name="hobby" value="외국어" onchange="select1()">
+            <label for="j">외국어</label>
+            <input type="checkbox" id="k"  name="hobby" value="컴퓨터" onchange="select1()">
+            <label for="k">컴퓨터</label>
+            <input type="checkbox" id="l"  name="hobby" value="만화" onchange="select1()">
+            <label for="l">만화</label>
+        </fieldset>
+    </form>
+    <button onclick="printAll()">카테고리 선택</button>
+    <div id="box"></div>
+</body>
+</html>

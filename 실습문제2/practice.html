@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <style>
+        button {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" readonly id="printNum">
+        <table>
+            <tr>
+                <td><button onclick="test(this.value)" value="C">C</button></td>
+                <td><button onclick="test(this.value)" value="bs">bs</button></td>
+                <td><button onclick="calc(this.value)" value="%">%</button></td>
+                <td><button class="aaa" onclick="calc(this.value)" value="/">/</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="inputNum(this.value)" value="7">7</button></td>
+                <td><button onclick="inputNum(this.value)" value="8">8</button></td>
+                <td><button onclick="inputNum(this.value)" value="9">9</button></td>
+                <td><button class="aaa" onclick="calc(this.value)" value="x">x</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="inputNum(this.value)" value="4">4</button></td>
+                <td><button onclick="inputNum(this.value)" value="5">5</button></td>
+                <td><button onclick="inputNum(this.value)" value="6">6</button></td>
+                <td><button class="aaa" onclick="calc(this.value)" value="-">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="inputNum(this.value)" value="1">1</button></td>
+                <td><button onclick="inputNum(this.value)" value="2">2</button></td>
+                <td><button onclick="inputNum(this.value)" value="3">3</button></td>
+                <td><button class="aaa" onclick="calc(this.value)" value="+">+</button></td>
+            </tr>
+            <tr>
+                <td colspan="2" onclick="inputNum(this.value)" value="0"><button>0</button></td>
+                <td><button onclick="inputNum(this.value)" value=".">.</button></td>
+                <td><button onclick="result()" value="=">=</button></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        let reArr = new Array;
+        let sum = 0;
+        var boolNum;
+        function inputNum(value) {
+            let num = document.getElementById("printNum");
+            if (boolNum == false) {
+                num.value = null;
+                num.value += value;
+                boolNum = true;
+            } else {
+                num.value += value;
+            }
+            
+        }
+        function test(value) {
+            let num = document.getElementById("printNum");
+            switch (value) {
+                case "bs":
+                    num.value = num.value.slice(0, num.value.length - 1);
+                    break;
+                case "C":
+                    reArr[0] = null;
+                    reArr[1] = null;
+                    num.value = null;
+                    break;
+            }
+        }
+        function calc(cal) {
+            console.log(cal);
+            let num = document.getElementById("printNum");
+            let intNum = parseInt(num.value);
+
+            if (reArr[1] == null) {
+                reArr[0] = intNum;
+                reArr[1] = cal;
+                boolNum = false;
+                return;
+            }
+            switch (reArr[1]) {
+                case "+":
+                    reArr[0] = parseInt(reArr[0]) + intNum;
+                    reArr[1] = cal;
+                    num.value = reArr[0];
+                    break;
+                case "-":
+                    reArr[0] = parseInt(reArr[0]) - intNum;
+                    reArr[1] = cal;
+                    num.value = reArr[0];
+                    break;
+                case "x":
+                    reArr[0] = parseInt(reArr[0]) * intNum;
+                    reArr[1] = cal;
+                    num.value = reArr[0];
+                    break;
+                case "/":
+                    reArr[0] = parseInt(reArr[0]) / intNum;
+                    reArr[1] = cal;
+                    num.value = reArr[0];
+                    break;
+                case "%":
+                    reArr[0] = parseInt(reArr[0]) % intNum;
+                    reArr[1] = cal;
+                    num.value = reArr[0];
+                    break;
+            }
+            boolNum = false;
+        }
+        function result() {
+            let num = document.getElementById("printNum");
+            let intNum = parseInt(num.value);
+
+            if (reArr[1] == null) {
+                reArr[0] = intNum;
+                boolNum = false;
+                return;
+            }
+            switch (reArr[1]) {
+                case "+":
+                    reArr[0] = parseInt(reArr[0]) + intNum;
+                    break;
+                case "-":
+                    reArr[0] = parseInt(reArr[0]) - intNum;
+                    break;
+                case "x":
+                    reArr[0] = parseInt(reArr[0]) * intNum;
+                    break;
+                case "/":
+                    reArr[0] = parseInt(reArr[0]) / intNum;
+                    break;
+                case "%":
+                    reArr[0] = parseInt(reArr[0]) % intNum;
+                    break;
+            }
+            boolNum = false;
+            reArr[1] = null;
+            num.value = reArr[0];
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script 요소에 접근하기</title>
+</head>
+<body>
+    <h1>HTML요소에 접근하기(해당 요소 객체 가져오기)</h1>
+    <h3> 1) 아이디를 이용해서 요소 가져오기</h3>
+    <button onclick="accessById()">아이디로 접근</button>
+    <div id="area1"></div>
+    <script>
+        var num = 10;
+        function accessById() {
+            // 아이디로 요소에 접근할 때,
+            // document.getElementById("아이디명"); => 선택한 요소 객체 반환
+            let area1 = document.getElementById("area1");
+            // 선택한 요소에 HTML 형식의 데이터를 출력
+            
+
+            // 선택한 요소의 스타일변경
+            area1.style.background = "yellow";
+            area1.style.color = "blue";
+            num += 2;
+            area1.style.fontSize = num + "px";
+            area1.innerHTML += "아이디로 접근 성공!! <br>";
+        }
+    </script>
+    <h3> 2) 클래스를 이용해서 요소 가져오기</h3>
+    <div>
+        <ul>
+            <li class="list-item">아이템</li>
+            <li class="list-item">아이템</li>
+            <li class="list-item">아이템</li>
+        </ul>
+    </div>
+    <button onclick="changeBackground()">배경색 바꾸기</button>
+    <script>
+        function changeBackground() {
+            //document.getElementByClassName("클래스명");
+            // => 선택한 클래스에 해당하는 요소 객체배열 반환
+            let listItem = document.getElementsByClassName("list-item");
+            
+            for(let i = 0; i < listItem.length ; i++){
+                listItem[i].style.background = "pink";
+            }
+        }
+    </script>
+    <h3> 3) 태그명을 이용하여 요소 가져오기</h3>
+    <button onclick="changeItemValue()">태그명으로 접근</button>
+    <script>
+        function changeItemValue() {
+            let list = document.getElementsByTagName("li");
+
+            console.log(list)
+            console.log("리스트의 길이 : " + list.length);
+            console.log("첫번째 리스트 요소 : " + list[0]);
+
+            for(let i = 0 ; i < list.length ; i++){
+                list[i].innerText = (i+1) + "번째 li 요소";
+            }
+        }
+    </script>
+    <h3> 4) name 속성을 이용하여 요소 가져오기</h3>
+    <form>
+        <fieldset> <!--form 내의 영역을 나누어 표시할 때 사용(단순 표시용)-->
+            <legend>나는 박혜성이다.</legend> <!--fieldset의 제목을 추가할 때-->
+            
+            <input type="checkbox" id="total" name="hobby" value="전체선택" onchange="changeTotal()" />
+            <label for="total">전체선택</label>
+            
+            <input type="checkbox" id="game" name="hobby" value="게임" onchange="checkBoxTrigger()" />
+            <label for="game">게임</label>
+
+            <input type="checkbox" id="netflix" name="hobby" value="넷플릭스보기" onchange="checkBoxTrigger()" />
+            <label for="netflix">넷플릭스보기</label>
+
+            <input type="checkbox" id="mountain" name="hobby" value="등산" onchange="checkBoxTrigger()" />
+            <label for="mountain">등산</label>
+        </fieldset>
+    </form>
+    <script>
+        function changeTotal() {
+            let total = document.getElementById("total");
+            console.log(total.checked);
+            let hobby = document.getElementsByName("hobby");
+            //for-each문 : java - 자료형 변수명 : 배열명 / js - 타입 변수명 of 배열명
+            for (let allCh of hobby){
+                allCh.checked = total.checked;
+            }
+            
+        }
+        function checkBoxTrigger() {
+            let hobby = true;
+            let hobbyList = document.getElementsByName("hobby");
+            for (let h of hobbyList){
+                //체크박스 중에 체크해제가 된 항목이 있을 경우
+                if (!h.checked){
+                    hobby = false;
+                }
+            }
+            document.getElementById("total").checked = hobby;
+
+        }
+    </script>
+    <h3> 5) 원하는 요소를 자유자재로 가져오기 (선택자 활용)</h3>
+    <div id="test1">테스트 영역</div>
+    <div class="test2">
+        <h2>2024-02-16</h2>
+        <h2>금요일</h2>
+    </div>
+    <span>@@@@@@@@@@@@@@@@</span>
+    <h2>곧 점심입니다.</h2>
+    <button onclick="accessElements()">선택자를 활용하여 접근</button>
+    <script>
+        function accessElements(){
+            //선택자를 활용하여 요소에 접근할 때
+            //  document.querySelector("선택자") => 선택된요소 하나만 반환
+            //  document.querySelectorAll("선택자") => 선택된 요소 객체배열 반환
+            const divT1 = document.querySelector("#test1");
+            //요소가 갖고 있는 콘텐츠 내용 조회(확인)
+            console.log(divT1.innerText);
+            console.log(divT1);
+
+            const divT2 = document.querySelectorAll(".test2 h2");
+            console.log(divT2[0].innerText);
+            console.log(divT2[1].innerText);
+
+            const divT3 = document.querySelector(".test2+span"); //+기호 해당 요소 바로 다음에 오는 선택자
+            console.log(divT3.innerText);
+        }
+    </script>
+</body>
+</html>

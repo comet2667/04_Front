@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .search {
+            display: flex;  
+            align-items: center;  
+        }
+        .search-1 {
+            margin: 10px;
+        }
+        #searchbar {
+            width: 50%;
+            height: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="search">
+            <form action="#" id="loc" class="search-1" >
+                <label>선택</label>
+                <select onchange="cate1()" id="select1">
+                    <option>option1</option>
+                    <option>option2</option>
+                    <option>option3</option>
+                    <option>option4</option>
+                    <option>option5</option>
+                    <option>option6</option>
+                </select>
+            </form>
+            <form action="#" id="" class="search-1" >
+                <label>선택</label>
+                <select onchange="cate2()" class="select2">
+                    <option>option1</option>
+                    <option>option2</option>
+                    <option>option3</option>
+                    <option>option4</option>
+                    <option>option5</option>
+                    <option>option6</option>
+                </select>
+            </form>
+
+            <input type="text" id="searchbar" id="search-1" placeholder="">
+            <button id="search-button" class="search-1">입력</button>
+        </div>
+    </header>
+    <script>
+        function cate1() {
+            let sel = document.getElementById("select1").value;
+            console.log(sel);
+            let search = document.getElementById("search-1");
+            search. = "placeholder='"+sel+"'";
+        }
+    </script>
+</body>
+
+</html>

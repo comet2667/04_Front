@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제2</title>
+    <script>
+        function selectOption() {
+            let op = document.getElementById("sel").value
+        }
+        function resultSet() {
+            let numArr = document.getElementsByName("num");
+            let op = document.getElementById("sel").value;
+            console.log(parseInt(numArr[0].value));
+            if(parseInt(numArr[0].value) == 0 || parseInt(numArr[1].value) == 0) {
+                document.getElementById("result").style.background = "red";
+                alert("0 이외의 정수를 입력해주세요.");
+                return;
+            }
+            let result = 0;
+            switch(op){
+                case '+':
+                result = parseInt(numArr[0].value) + parseInt(numArr[1].value);
+                break;
+                case '-':
+                result = parseInt(numArr[0].value) - parseInt(numArr[1].value);
+                break;
+                case '*':
+                result = parseInt(numArr[0].value) * parseInt(numArr[1].value);
+                break;
+                case '/':
+                result = parseInt(numArr[0].value) / parseInt(numArr[1].value);
+                break;
+                case '%':
+                result = parseInt(numArr[0].value) % parseInt(numArr[1].value);
+                break;
+                default:
+                alert("연산자를 선택하세요.");
+                return;
+            }
+            console.log(result);
+            console.log(10%3);
+            if(isNaN(result)){
+                result = 0;
+            }
+            console.log(result);
+            document.getElementById("result").value = result;
+        }
+        function fileTest01() {
+            document.getElementById(fileTest);
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" name="num">
+    <form>
+        <select id="sel">
+            <option value="X">선택</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+    </form>
+    <input type="number" name="num">
+    <button onclick="resultSet()">=</button>
+    <input type="text" id="result" readonly>
+    <input type="file" id="fileTest">
+</body>
+</html>

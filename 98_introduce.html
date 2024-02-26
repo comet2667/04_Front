@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image img {
+            animation: move 2s infinite;
+        }
+        @keyframes move{
+            0% {transform: scale(150px); border: 2px solid red;}
+            25% {transform: matrix(-1,1,2,3,2,1); border: 2px solid blue;}
+            50% {transform: translate(150px); border: 2px solid violet;}
+            90% {transform: rotate(191deg); border: 2px solid greenyellow;}
+        }
+        #box {
+            border: 2px solid black;
+            width: 150px;
+            height: 150px;
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 30px;
+        }
+        @keyframes move2 {
+            0% {transform: translate(1px, 1px); border: 2px solid greenyellow;}
+            50% {transform: translate(-1px, -1px); border: 2px solid violet;}
+            100% {transform: translate(3px, 3px); border : 2px solid blue;}
+        }
+        #box:hover{
+            animation: move2 1ms infinite;
+        }
+        .image img:hover{
+            animation: move2 1ms infinite;
+        }
+
+    </style>
+    <script>
+        function boxClick(){
+            var a = document.getElementById("box");
+            a.innerHTML = "안녕하세요, 박혜성입니다.";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>안녕하세요, 박혜성입니다.</h1>
+        <div class="image">
+            <img src="/박혜성_증명사진.jpg" style="height: 150px;">
+        </div>
+        <div id="box" onclick="boxClick()">클릭</div>
+    </header>
+</body>
+</html>

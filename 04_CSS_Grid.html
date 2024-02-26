@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout Page</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /*1대1대1 비율*/
+            column-gap: 10px;
+            row-gap: 10px;
+            background-color: thistle;
+            padding: 30px;
+            height: 500px;
+        }
+        .grid-container div {
+            background-color: aquamarine;
+        }
+        div.item5 {
+            background-color: chartreuse;
+        }
+        .item5 {
+            background-color: brown !important; 
+        }
+    </style>
+</head>
+<body>
+    <!-- grid-tmplate-columns : 그리드 내의 아이템(컬럼)의 크기을 설정하는 스타일 속성-->
+    <div style="display: grid; grid-template-columns: 100px 100px 100px;">
+        <div style="background-color: chartreuse;">Div 1</div>
+        <div style="background-color: cornflowerblue;">Div 2</div>
+        <div style="background-color: darkgoldenrod;">Div 3</div>
+    </div>
+    <br>
+    <!-- column-gap : 그리드 내 아이템(컬럼) 간의 간격을 설정하는 스타일 속성-->
+    <div style="display: grid; grid-template-columns: 100px 100px 100px;
+                column-gap: 10px;">
+        <div style="background-color: rgb(121, 96, 90);">Div 1</div>
+        <div style="background-color: rgb(237, 100, 157);">Div 2</div>
+        <div style="background-color: rgb(11, 184, 11);">Div 3</div> 
+    </div>
+    <br>
+    <hr>
+    <div class="grid-container">
+        <div class="item1">div1</div>
+        <div class="item2">div2</div>
+        <div class="item3">div3</div>
+        <div class="item4">div4</div>
+        <div class="item5">div5</div>
+        <div class="item6">div6</div>
+        <div class="item7">div7</div>
+        <div class="item8">div8</div>
+    </div>
+</body>
+</html>

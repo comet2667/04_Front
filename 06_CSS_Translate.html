@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Translate Page</title>
+    <style>
+        .translate-box {
+            border: 2px solid;
+            width: 100px;
+            height: 100px;
+            background-color: tan;
+            position: relative; /*position : relative => 이전 요소와 연결하여 배치*/
+
+            /*animation 속성 : 이름(keyframes로 정의해놓은)
+                    이름 duration timing-function delay iterator-count direction
+                    - duration : 애니메이션 실행 시간
+                    - timing-function : 애니메이션 진행 방식
+                    - delay : 애니메이션 대기 시간
+                    - iterator-count : 반복 횟수
+                    - direction : 애니메이션 진행 방향*/
+            animation: move 2s infinite;
+        }
+        /*애니메이션 적용 : @keyframes 이름*/
+        @keyframes move {
+            0% {background-color: royalblue; transform: translate(0px, 0px);}
+
+            25% {background-color: aqua; transform: translate(150px, 0px);}
+
+            50% {background-color: black; transform: matrix(-1,1,1,1,1,1);}
+
+            75% {background-color: brown; transform: matrix(1,-1,-1,2,-1,2);}
+
+            100% {background-color: blueviolet; transform: translate(0px, 0px);}
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="translate-box"></div>
+</body>
+</html>

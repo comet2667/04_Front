@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function changeText() {
+                var button = document.getElementById("button");
+                var a1 = ['김','박','이','명','강','선','최','서'];
+                var a2 = ['명','옥','천','태','순','성','민','덕'];
+                var a3 = ['옥','천','성','민','덕', '육', '팔','칠'];
+                var a = parseInt(Math.random() *8);
+                var b = parseInt(Math.random() *8);
+                var c = parseInt(Math.random() *8);
+                var d = inputText()
+                if (b == c){
+                    var c = parseInt(Math.random() *8);
+                }
+                button.innerHTML = a1[a] + a2[b] + a3[c];
+            }
+            function inputText() {
+                var g = document.getElementById("input");
+                
+            }
+        </script>
+        <style>
+            .test1 {
+                cursor: pointer;
+                height: 100px;
+                font-size: 80px;
+            }
+        </style>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="test1">
+                <div id="button" onclick="changeText()">박혜성</div>
+            </div>
+            <div><button onclick="changeText()">
+                이름 랜덤 설정
+            </div>
+        </header>
+        <main>
+            <div class="test2">
+                <input id = "input">
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

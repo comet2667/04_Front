@@ -1,0 +1,20 @@
+p#f-style1 {
+    font-family: cursive; /*글꼴 관련 스타일, 여러개 나열 가능,
+                                            앞에서부터 사용할 수 없으면 다음 글꼴시 사용*/
+    /*font-size : 글자 크리, 단위 (px(고정), cm, em(상대), %)*/
+    font-size: 2em;
+    /*font-weight : 굵게 표시하는 스타일*/
+    font-weight: 400;   /*400 : 기본, 700 : bold*/
+    /*font-style : 글꼴 스타일 ex)기울임*/
+    font-style: italic;
+    /*font: font-style font-variant font-weight font-size/line-height font-family */
+}
+/*p {font: italic 700 large smaller message-box;}*/
+p#f-style2 {font: italic 700 30px cursive;}
+#sp {font-size: 30px;}
+#f-style3 > span:last-child {font-size: 50px;}
+
+/*text-decoration : 밑줄(underline)/취소선(line-through)/윗줄(overline)*/
+#f-style4 > span:nth-child(1) {text-decoration: underline;}
+#f-style4 > span:nth-child(2) {text-decoration: line-through;}
+#f-style4 > span:nth-child(3) {text-decoration: overline;}

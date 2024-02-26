@@ -1,0 +1,13 @@
+/*
+    list-style-type : 목록 스타일을 지정
+        * ul 태그 : disc(검정 원형), circle(흰색 원형), square(검정 사각형), none(없음)
+*/
+#u1 {
+    list-style-type: square;
+}
+/*
+    list-style-image : 기호 대신 이미지로 스타일을 지정
+*/
+#u2 {
+    list-style-image: url(박혜성_증명사진.jpg)
+}

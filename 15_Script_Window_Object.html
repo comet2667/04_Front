@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Window 객체</title>
+    <style>
+        .area {
+            border: 1px solid blueviolet;
+            background-color: aqua;
+        }
+        .big {
+            height: 500px;
+        }
+        .small {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Window 객체</h1>
+    <p>
+        window 객체는 자바스크립트의 최상위 객체<br>
+        크게 BOM과 DOM으로 나누어짐
+    </p>
+    <br>
+    <p>- BOM(Browser Object Model) : location객체, screen객체, navigator객체, history객체</p>
+    <p>- DOM(Document Object Model) : document객체</p>
+    <br>
+    <h3>[window.]open("url", "창이름", "창의 특징")</h3>
+    <button onclick="test1()">네이버</button>
+    <script>
+        function test1() {
+            console.log(window);
+            /*
+                window.open(첫번째, 두번째, 세번째);
+
+                - 첫번째 : 새 창에서 열고자하는 url 주소
+                - 두번째 : 창 이름(target), 해당 창 이름으로 같은 창이 열려있으면 새로 열리지 않고, 열려있는 창을 표시
+                - 세번째 : 새 창의 너비, 높이, 주소창여부, 툴바 여부 등
+
+            */
+            //window.open("http://www.naver.com", "네이버로 연결", );
+            /*
+                * 창의 특징(설정) 
+                    => px
+                    - width : 창의 너비
+                    - height : 창의 높이
+
+                    => yes/no
+                    - resizable : 창의 크기 조절 여부 -- IE에서만 지원
+                    - location : 주소창
+                    - toolbar : 툴바(도구모음)
+                    - scrollbars : 스크롤바
+                    - status : 상태 표시줄
+
+            */
+            window.open("http://www.naver.com", "네이버", "width=100, height=100, location=no, toolbar=no, scrollbars=no");
+        }
+    </script>
+    <hr>
+    <h3>[window.]setTimeout(함수, 시간ms)</h3>
+    <p>
+        설정한 시간 후에 함수의 내용을 실행 ("한번만 실행")
+    </p>
+    <button onclick="test2()">시간</button>
+    <div class="area small" id="area1"></div>
+    <script>
+        function test2(){
+            console.log("시작 ...");
+            setTimeout(function(){
+                console.log("setTimeout 실행!")
+            }, 5000);
+            console.log("종료!");
+
+            //setTimeout : 설정한 시간 후에 해당 함수 내용을 "한번만" 실행
+        }
+    </script>
+    <h3>[window.]setInterval(함수, 시간ms)</h3>
+    <p>
+        설정한 시간마다 함수 내용을 실행
+    </p>
+    <button onclick="test3()">실행</button>
+    <div class="area small" id="area2"></div>
+    <script>
+        function test3() {
+            let seconds = 1;
+            setInterval(function(){
+                document.getElementById("area2").innerText = seconds++ +"\n";
+            }, 1000)
+            setInterval(function(){
+                const now = new Date();
+                document.getElementById("area2").innerText += now.getHours()+":"+now.getMinutes()+":"+now.getSeconds()+"\n";
+            }, 1000)
+        }
+    </script>
+    <script>
+        onload = function() {   //윈도우가 로드되었을 때 수행할 함수
+            setTimeout(function() {
+                //alert("반갑습니다.")
+            }, 3*1000)
+        }
+    </script>
+    <hr>
+    <h2>BOM(Browser Object Model)</h2>
+    <h3>location 객체</h3>
+    <p>
+        브라우저의 주소창과 관련된 객체
+    </p>
+    <button onclick="console.log(location)">location 객체 확인</button>
+    <br><br>
+    <!-- a태그는 클릭 시 요청할 url로 이동할 수 있는 href 속성을 제공-->
+    <a href="https://www.naver.com">네이버로 이동</a>
+    <button onclick="location.href = 'https://www.naver.com';">네이버 이동</button>
+    <div onclick="location.href = 'https://www.naver.com';" style="cursor: pointer;">네이버로 이동</div>
+    <button onclick="location.replace('https://www.google.com')">구글이동</button>
+    <!--location.replace : 뒤로가기가 안됨!!!! -->
+    <br>
+    <button onclick="location.reload()">새로고침</button>
+    <button onclick="location.href = location.href">새로고침</button>
+    <br>
+    <hr>
+    <br>
+    <h2>DOM (Document Object Model)</h2>
+    <태그>
+        HTML에 있는 각각의 요소들을 노드(node)라고 표현함<br>
+        > 요소 노드(Element Node) : 태그 그 자체만 의미<br>
+        > 텍스트 노드(Text Node) &nbsp;&nbsp;&nbsp;: 태그 내의 내용 부분을 의미<br>
+    </p>
+    <div>
+        <input type="text">
+        <h1>Hi</h1>
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+        </ul>
+    </div>
+    <h3>* 노드(요소) 생성과 관련된 메소드</h3>
+    <h4>텍스트 노드가 존재하는 노드 생성 (시작태그 + 종료태그)</h4>
+    <button onclick="test4()">노드생성</button>
+    <div id="area4"></div>
+    <script>
+        function test4(){
+            //<h4>안녕하세요<h4> => 노드 추가하기
+
+            const area4 = document.getElementById("area4");
+            area4.style.border = "1px solid black";
+            // 1. "문자열"로 만드는 방법
+            area4.innerHTML += "<h4>안녕하세요<h4>";
+            
+            // 2. document 객체의 메소드를 활용하는 방법
+            // document.createElement("태그명"); => 요소 노드(Element Node) 생성 (<태그><태그>)
+            // document.createTextNode("내용"); => 텍스트 노드(Text Node) 생성 (내용)
+            //      => Element.appendChild(textNode) => 요소 노드에 텍스트 노드를 결합 (<태그>내용<태그>)
+            const element = document.createElement("h1");
+            const textNode = document.createTextNode("안녕하세요. 노드입니다.");
+            element.appendChild(textNode);
+
+            area4.appendChild(element); // div 영역에 생성한 요소를 추가
+            
+        }
+    </script>
+    <h4>텍스트 노드가 존재하지 않는 요소 노드 생성 (시작태그만 존재하는 태그)</h4>
+    <button onclick="test5()">노드생성</button>
+    <div id="area5"></div>
+    <script>
+        function test5(){
+            // <img src="" width="" height=""> => 노드 추가하기
+
+            const imgEle = document.createElement("img");
+            imgEle.src = "/img.jpg";
+            imgEle.width = "300";
+
+
+            document.getElementById("area5").appendChild(imgEle);
+        }
+    </script>
+    <h4>* 요소 노드를 삭제</h4>
+    <button onclick="test6()">노드 삭제</button>
+    <script>
+        function test6(){
+            const area5 = document.getElementById("area5");
+            //삭제하고자 하는 요소 노드(객체).remove();
+            //area5.firstChild.remove();
+            //선택자를 사용하여 요소에 접근 => 아이디 속성이 'area5'인 요소 내 img요소 삭제
+            document.querySelector("#area5 img").remove();
+        }
+    </script>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

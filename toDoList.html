@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        tr, td, th {
+            border: 1px solid;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        onload = function () {
+            var tContents = document.getElementById('tContents');
+            var tSub = document.getElementById('tSub');
+            tSub.addEventListener('click', () => {
+                let tDate = document.getElementById('tDate');
+                let tdw = document.getElementById('tdw');
+
+                let tdCheck = '<td><input type="checkbox" class="tCheck"></td>';
+                let tdDate = '<td>' + tDate.value + '</td>';
+                let tdComDate = '<td class="compDate"></td>';
+                let tdVal = '<td class="content">' + tdw.value + '</td>';
+                let tdStat = '<td class="status">진행중</td>';
+                let tdUpdate = '<td class="tdUpdate">수정하기</td>';
+                let tdDelete = '<td class="tdDelete">삭제하기</td>';
+                let html = tdCheck+tdDate+tdComDate+tdVal+tdStat+tdUpdate+tdDelete;
+                if (tDate.value == '' || tdw.value == '') {
+                    alert('일정과 할 일을 입력해주세요.');
+                } else {
+                    tContents.innerHTML += '<tr>'+html+'</tr>';
+                }
+                tDate.value = '';
+                tdw.value = '';
+            });
+        }
+        
+
+        $(document).on("change", "input[type='checkbox']", function(){
+            let today = new Date();
+            if($(this).is(':checked')){
+                $(this).parent().parent().css('background-color', 'skyblue');
+                $(this).parent().siblings('.compDate').text(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate());
+                $(this).parent().siblings('.status').text('완료');
+            } else {
+                $(this).parent().parent().css('background-color', 'grey');
+                $(this).parent().siblings('.compDate').text("");
+                $(this).parent().siblings('.status').text('보류');
+            }
+        });
+        $(document).on("click", ".tdDelete", function(){
+            $(this).parent().html('');
+        });
+        var temp = '';
+        $(document).on("click", ".tdUpdate", function(){
+            temp = $(this).siblings('.content').text();
+            
+            $(this).siblings('.content').html('<td class="content"><input type="text" id="updateCon"><input type="button" value="변경" class="upDateCheck"><input type="button" value="취소" class="upDateCheck"></td>');
+        })
+        $(document).on("click", ".upDateCheck", function(){
+            let upDateContent = $(this).siblings('#updateCon').val();
+            if ($(this).val() == "변경"){
+                $(this).parent().parent().text(upDateContent);
+            } else {
+                $(this).parent().parent().text(temp);
+                temp = '';
+            }
+        })
+        
+    </script>
+</head>
+
+<body>
+    <h1>To Do List</h1>
+    <header>
+        <form style="width: px;">
+            <span class="input-group-text" id="addon-wrapping">목표 일정</span>
+            <input type="date" name="date" id="tDate" class="form-control">
+            <span class="input-group-text" id="addon-wrapping">할 일</span>
+            <input type="text" name="cont" id="tdw" class="form-control" placeholder="내용 입력">
+            <input type="button" value="등록" id="tSub" class="btn btn-primary" style="width: 100%;">
+        </form>
+    </header>
+    <main>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>체크</th>
+                    <th>목표 일정</th>
+                    <th>완료 일정</th>
+                    <th>내용</th>
+                    <th>상태</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="tContents">
+
+            </tbody>
+        </table>
+        </div>
+    </main>
+</body>
+
+</html>
